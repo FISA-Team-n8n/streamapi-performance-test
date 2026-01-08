@@ -58,7 +58,9 @@ Stream 파이프라인에서 Intermediate Operation을 과도하게 사용할 �
 ➡️ 결과는 같지만 가독성 저하, 대량 데이터에서는 성능 저하
 
 <br>
+
 # 권순재
+
 # 🏃 Java Stream Performance Test
 
 ## 🙅‍♂️ Java Stream에서 자주 하는 실수 7가지
@@ -109,7 +111,9 @@ Stream 파이프라인에서 Intermediate Operation을 과도하게 사용할 �
   2. 연산자가 나뉘어 있으면 데이터가 지나갈 때마다 함수를 호출해야한다. 즉, 함수 호출 비용이 든다.
 
 <br>
+
 # 서가영
+
 ### 1️⃣ Parallel Stream Overhead 
 - Parrllel Stream : 각각의 스레드에서 스트림을 처리할 수 있도록 스트림 요소를 여러 청크로 분할한 것
 
