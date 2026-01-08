@@ -9,6 +9,9 @@ public class StreamLab2 {
 
 	public static void main(String[] args) {
 		List<String> names = Arrays.asList("Alice", "Bob","Charlie","David","Eve");
+
+		names.stream().filter(n -> true).map(String::toUpperCase).toList();
+		System.out.println("--- JVM 준비 완료 ---");
 		
 		long startTime1 = System.currentTimeMillis();
 		List<String> result = names.stream()
@@ -20,9 +23,9 @@ public class StreamLab2 {
 		
 		System.out.println(result);
 		long endTime1 = System.currentTimeMillis();
+		System.out.println(names + " : " + (endTime1 - startTime1) + " ms");
 		
 		long startTime2 = System.currentTimeMillis();
-		System.out.println(names + " : " + (endTime1 - startTime1) + " ms");
 		
 		List<String> result2 = names.stream()
 				.filter(name -> name.startsWith("A") && name.length() > 3)
