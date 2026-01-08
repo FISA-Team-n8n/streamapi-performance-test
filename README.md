@@ -16,6 +16,65 @@
 1. **데이터 크기**: 작은 데이터: 1,000개, 큰 데이터: 10,000,000개
 2. **연산 작업**: 리스트의 각 숫자를 제곱하여 다시 리스트에 넣기
 
+### 구현 코드
+```
+package streamlab;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+
+// 3번 예시
+public class StreamLab {
+
+    public static void main(String[] args) {
+        // 1. 데이터 준비
+        System.out.println("데이터 생성 중");
+        // 작은 데이터 (1,000개)
+        List<Integer> smallData = IntStream.rangeClosed(1, 1_000).boxed().collect(Collectors.toList());
+        // 큰 데이터 (1,000만 개)
+        List<Integer> largeData = IntStream.rangeClosed(1, 10_000_000).boxed().collect(Collectors.toList());
+        System.out.println("데이터 준비 완료.\n");
+
+        // ----------------------------------------------------
+
+        System.out.println("=== 1. 작은 데이터셋 (1,000개) ===");
+        runTest("Small - Sequential", smallData, false);
+        runTest("Small - Parallel  ", smallData, true);
+
+        System.out.println("\n----------------------------------------------------\n");
+
+        System.out.println("=== 2. 큰 데이터셋 (1,000만 개) ===");
+        
+        runTest("Large - Sequential", largeData, false);
+      
+        runTest("Large - Parallel  ", largeData, true);
+    }
+
+    public static void runTest(String name, List<Integer> data, boolean isParallel) {
+        long startTime = System.currentTimeMillis();
+
+        List<Integer> result;
+        if (isParallel) {
+            result = data.parallelStream()
+                .map(n -> {
+                    return n * n;
+                })
+                .collect(Collectors.toList());
+        } else {
+            result = data.stream()
+                .map(n -> {
+                    return n * n;
+                })
+                .collect(Collectors.toList());
+        }
+
+        long endTime = System.currentTimeMillis();
+        System.out.println(name + " : " + (endTime - startTime) + " ms");
+    }
+}
+```
 ### 결과 분석 (Result)
 
 | 데이터 크기 | 처리 방식 (Method) | 소요 시간 (측정마다 다르게 나옴) |
