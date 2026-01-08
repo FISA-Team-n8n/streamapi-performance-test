@@ -31,8 +31,17 @@
         - findFirst(): 첫 번째 요소를 반환한다.
         - findAny(): 아무거나 하나 반환한다 (병렬 처리에서 findFirst보다 빠르다).
 
-### 2번 실수: Terminal Operation 미사용
-### 3번 실수: 데이터 구조를 바꿀 때 예상치 못한 결과가 나올 수도 있다.
+### 2번 실수: 데이터 구조를 바꿀 때 예상치 못한 결과가 나올 수도 있다.
+> 기존의 원본 데이터에서 데이터 구조를 바꾸려고 하면 ConcurrentModificationException(동시 수정 예외) 발생 가능성이 높아진다.
+
+<br>
+
+**해결책**
+
+> 원본의 데이터 구조를 변경하지 말고 조건에 맞는 새로운 collection을 생성해야 한다. (마지막에 .collect(Collectors.toList())를 사용)
+
+### 3번 실수: 병렬처리의 overhead
+병렬처리가 항상 
 ### 4번 실수: Terminal Operation 미사용
 ### 5번 실수: Terminal Operation 미사용
 ### 6번 실수: Terminal Operation 미사용
