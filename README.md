@@ -41,8 +41,19 @@
 > 원본의 데이터 구조를 변경하지 말고 조건에 맞는 새로운 collection을 생성해야 한다. (마지막에 .collect(Collectors.toList())를 사용)
 
 ### 3번 실수: 병렬처리의 overhead
-병렬처리가 항상 
-### 4번 실수: Terminal Operation 미사용
+데이터의 양이 적거나 연산이 단순한 경우에도 무조건 .parallelStream()을 사용하는 실수
+<br>
+**왜 안 좋은가?**
+<br>
+병렬처리가 항상 좋은 performance를 주는 것은 아니다. 작은 프로젝트에서는 병렬의 overhead가 더 클 수도 있기 때문에 잘 선택해야한다.
+### 4번 실수: 중간 연산자 남발 실수
+filter()나 map()과 같은 중간 연산자를 필요 이상으로 길게 연결하는 것. (Chaining)
+<br>
+**왜 안 좋은가?**
+<br>
+1. 가독성 저하, 코드가 불필요하게 길어져 한눈에 로직을 파악하기가 어렵다.
+2. 파이프라인 비용, 각 중간 연산마다 새로운 스트림 단계 객체가 생성되므로, 초기화 비용이 증가한다.
+
 ### 5번 실수: Terminal Operation 미사용
 ### 6번 실수: Terminal Operation 미사용
 ### 7번 실수: Terminal Operation 미사용
