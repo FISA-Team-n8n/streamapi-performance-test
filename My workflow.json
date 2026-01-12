@@ -1,0 +1,123 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -416,
+        -80
+      ],
+      "id": "d984cafe-8e2e-49b8-9d04-474f17e96fe6",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE TABLE IF NOT EXISTS news_articles (\n    id INT AUTO_INCREMENT PRIMARY KEY,\n    title VARCHAR(500) NOT NULL,       \n    content TEXT,                      \n    source_url VARCHAR(500) UNIQUE,     \n    category VARCHAR(100),             \n    published_at DATETIME,              \n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP \n);",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.5,
+      "position": [
+        -208,
+        -80
+      ],
+      "id": "8df172c1-563a-48e1-a5c6-20753a41065a",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "mySql": {
+          "id": "uNl6eExIrtOXOUcY",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://rss.mt.co.kr/mt_news.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -16,
+        176
+      ],
+      "id": "af3ce2be-fe80-49bc-a662-1d1134dd1e0d",
+      "name": "RSS Read"
+    },
+    {
+      "parameters": {
+        "table": {
+          "__rl": true,
+          "value": "news_articles",
+          "mode": "list",
+          "cachedResultName": "news_articles"
+        },
+        "dataMode": "defineBelow",
+        "valuesToSend": {
+          "values": [
+            {
+              "column": "=title",
+              "value": "={{ $json.title }}"
+            },
+            {
+              "column": "=content",
+              "value": "={{ $json.contentSnippet }}"
+            },
+            {
+              "column": "=source_url",
+              "value": "={{ $json.link }}"
+            },
+            {
+              "column": "=published_at",
+              "value": "={{ $json.isoDate ? $json.isoDate.toDateTime().format('yyyy-MM-dd HH:mm:ss') : $now.format('yyyy-MM-dd HH:mm:ss') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.5,
+      "position": [
+        304,
+        144
+      ],
+      "id": "a4ea2eee-622b-4966-bdcf-a330cf56c9a0",
+      "name": "Insert rows in a table",
+      "credentials": {
+        "mySql": {
+          "id": "uNl6eExIrtOXOUcY",
+          "name": "MySQL account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "2b203790-b69c-4f44-8eeb-cd851402aca6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "cb179c2d9d3fd2489874bdf1d4b1ca74d10882ee2e3b1c167c96261bce151478"
+  },
+  "id": "BL2wrax6jC-JplQjQRyNS",
+  "tags": []
+}
