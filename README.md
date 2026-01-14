@@ -8,7 +8,7 @@
 
 | <img src="https://avatars.githubusercontent.com/u/178015712?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/118096607?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/89902255?v=4" width="150" height="150"/> | 
 | :-----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |  
-|                 권순재<br/>[@caminobelllo](https://github.com/Soooonnn)                 |                       서가영<br/>[@caminobelllo](https://github.com/caminobelllo)                       |                유예원<br/>[@Yewon0106](https://github.com/Yewon0106)                |   
+|                 권순재<br/>[@Soooonnn](https://github.com/Soooonnn)                 |                       서가영<br/>[@caminobelllo](https://github.com/caminobelllo)                       |                유예원<br/>[@Yewon0106](https://github.com/Yewon0106)                |   
 
 
 <br />
